@@ -1,0 +1,50 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{pageTitle}}
+    </div>
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-2'>Search Passenger:</div>
+            <div class='col-md-4'>
+                <input type='text' [(ngModel)]='listFilter' />
+            </div>
+        </div>
+        <div class='table-responsive'>
+            <table class='table'
+                    *ngIf='passengers && passengers.length'>
+                <thead>
+                    <tr>
+                        <th>Notes</th>
+                        <th>Passenger ID</th>
+                        <th>Passenger Name</th>
+                        <th>Survived</th>
+                        <th>Age</th>
+                        <th>Sex</th>
+                        <th>Ticket Type</th>
+                        <th>Ticket Number</th>
+                        <th>Ticket Fare</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let passenger of filteredPassengers'>
+                        <td><button id='notes' style="background-color:white; border-color:white;" (click)= 'openDialog(passenger.id)'>
+                            <img src="./assets/images/notes.png" 
+                            class="img-responsive center-block"style="width:25px;height:25px"/></button></td>
+                        <td>{{passenger.id}}</td>
+                        <td>{{ passenger.name }}</td>
+                        <td>{{ passenger.survived}}</td>
+                        <td>{{ passenger.age }}</td>
+                        <td>{{ passenger.sex}}</td>
+                        <td>{{ passenger.ticket_type}}</td>
+                        <td>{{ passenger.ticket_number}}</td>
+                        <td>{{ passenger.ticket_fare | currency:'USD':true:'1.2-2'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div> 
+    
+</div>
+<div *ngIf='errorMessage' class='alert alert-danger'>
+    Error: {{ errorMessage }}
+</div>

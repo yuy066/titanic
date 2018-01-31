@@ -1,0 +1,36 @@
+<h2>Notes for Passenger {{data.id}}</h2>
+<div class='table-responsive'>
+        <table class='table'
+                *ngIf='notes && notes.length'>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Update Time</th>
+                    <th>Message</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor='let note of notes'>
+                    <td>{{ note.id}}</td>
+                    <td>{{ note.timestamp | date:'short'}}</td>
+                    <td style="word-wrap: break-word; width:400px">{{ note.message}}</td>
+                    <td><button (click)="deleteNote(note.id)" style="background-color:white; border-color:white;">
+                            <img src="./assets/images/trash.jpg" 
+                            class="img-responsive center-block"style="width:25px;height:25px"/>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+<div>
+    <textarea [(ngModel)]="newAttribute.message" name="newAttributeMsg"  cols="40" rows="3"></textarea>
+    <button (click)='addNote(data.id)'  style="background-color:white; border-color:white;">
+        <img src="./assets/images/add.png" 
+        class="img-responsive center-block"style="width:25px;height:25px"/>
+    </button>
+</div>
+
+<div *ngIf='errorMessage' class='alert alert-danger'>
+    Error: {{ errorMessage }}
+</div>
